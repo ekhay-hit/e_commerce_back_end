@@ -29,14 +29,21 @@ router.get('/:id', async(req, res) => {
   }catch(err){
     res.status(500).json(err)
   }
- 
 });
 
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
   // create a new category
+  try{
+    const addCategory = await Category.create({
+      category_name : req.body.category_name
+    })
+    res.status(200).json(addCategory);
+  }catch(err){
+    res.status(500).json(err);
+  }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async(req, res) => {
   // update a category by its `id` value
 });
 
